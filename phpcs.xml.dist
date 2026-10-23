@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="Importright">
+	<file>total-import.php</file>
+	<file>uninstall.php</file>
+	<file>src</file>
+	<file>tests</file>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<arg name="extensions" value="php"/>
+	<arg value="ps"/>
+	<config name="testVersion" value="8.0-"/>
+	<config name="minimum_wp_version" value="6.2"/>
+	<rule ref="PHPCompatibilityWP"/>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="total-import"/>
+			</property>
+		</properties>
+	</rule>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="importright"/>
+				<element value="Importright"/>
+				<element value="IMPORTRIGHT"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

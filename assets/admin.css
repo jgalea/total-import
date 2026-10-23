@@ -1,0 +1,778 @@
+.importright {
+	--importright-border: oklch(0.82 0.005 265);
+	--importright-muted: oklch(0.5 0.01 265);
+	--importright-surface: oklch(1 0 none);
+	--importright-tint: oklch(0.97 0.004 265);
+	--importright-accent: oklch(0.5 0.13 255);
+	--importright-success: oklch(0.55 0.13 150);
+	--importright-warning: oklch(0.62 0.13 75);
+	--importright-error: oklch(0.52 0.19 27);
+}
+
+.importright :focus-visible {
+	outline: 2px solid var(--importright-accent);
+	outline-offset: 2px;
+}
+
+/* Headings and result boxes take focus from the script only, to move screen readers along. */
+.importright [tabindex="-1"]:focus-visible {
+	outline: 2px solid transparent;
+}
+
+.importright .importright-muted {
+	color: var(--importright-muted);
+}
+
+.importright .num {
+	text-align: end;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Imports list */
+
+.importright .column-name {
+	inline-size: 26%;
+}
+
+.importright .column-last_run {
+	inline-size: 30%;
+}
+
+.importright .importright-source {
+	background: none;
+	padding: 0;
+	font-size: 12px;
+	overflow-wrap: anywhere;
+}
+
+.importright .importright-counts,
+.importright time {
+	font-variant-numeric: tabular-nums;
+}
+
+.importright .importright-status,
+.importright .importright-tag {
+	display: inline-block;
+	padding: 1px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	line-height: 1.6;
+	background: var(--importright-tint);
+	border: 1px solid var(--importright-border);
+}
+
+.importright .importright-status-completed,
+.importright .importright-action-create {
+	border-color: color-mix(in oklch, var(--importright-success) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-success) 10%, white);
+}
+
+.importright .importright-status-failed,
+.importright .importright-action-fail {
+	border-color: color-mix(in oklch, var(--importright-error) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-error) 10%, white);
+}
+
+.importright .importright-status-cancelled,
+.importright .importright-status-running,
+.importright .importright-status-pending,
+.importright .importright-action-update {
+	border-color: color-mix(in oklch, var(--importright-warning) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-warning) 10%, white);
+}
+
+.importright .importright-upload-definition {
+	margin-block-start: 24px;
+}
+
+.importright .importright-upload-definition summary {
+	cursor: pointer;
+	font-weight: 600;
+	padding-block: 4px;
+}
+
+/* Wizard steps */
+
+.importright .importright-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 20px;
+	margin: 16px 0 8px;
+	padding: 0;
+	list-style: none;
+	counter-reset: importright-step;
+}
+
+.importright .importright-steps li {
+	margin: 0;
+	counter-increment: importright-step;
+}
+
+.importright .importright-steps button {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 6px;
+	min-block-size: 32px;
+	padding-inline: 2px;
+	text-decoration: none;
+	color: var(--importright-muted);
+}
+
+.importright .importright-steps button::before {
+	content: counter(importright-step);
+	display: inline-grid;
+	place-items: center;
+	inline-size: 22px;
+	block-size: 22px;
+	border-radius: 50%;
+	border: 1px solid var(--importright-border);
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+}
+
+.importright .importright-steps .is-done button {
+	color: inherit;
+}
+
+.importright .importright-steps button[aria-current="step"] {
+	color: var(--importright-accent);
+	font-weight: 600;
+}
+
+.importright .importright-steps button[aria-current="step"]::before {
+	background: var(--importright-accent);
+	border-color: var(--importright-accent);
+	color: var(--importright-surface);
+}
+
+.importright .importright-steps button:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.importright .importright-steps button:not(:disabled):hover {
+		color: var(--importright-accent);
+	}
+}
+
+.importright .importright-step {
+	background: var(--importright-surface);
+	border: 1px solid var(--importright-border);
+	padding: 4px 20px 8px;
+	margin-block-end: 20px;
+}
+
+.importright .importright-step > h2 {
+	margin-block: 16px 8px;
+}
+
+.importright .importright-step-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding-block-start: 12px;
+	border-block-start: 1px solid var(--importright-border);
+}
+
+.importright .importright-step-nav [data-nav="next"] {
+	margin-inline-start: auto;
+}
+
+.importright .importright-inline {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+}
+
+.importright .importright-inline input {
+	flex: 1 1 18rem;
+	min-inline-size: 0;
+	inline-size: auto;
+	max-inline-size: 100%;
+}
+
+.importright .importright-file-status,
+.importright .importright-detected {
+	color: var(--importright-muted);
+	overflow-wrap: anywhere;
+}
+
+.importright .importright-file-status:empty {
+	display: none;
+}
+
+.importright .importright-file-status.is-error {
+	color: var(--importright-error);
+}
+
+.importright .importright-detected {
+	margin-inline-start: 8px;
+}
+
+.importright .importright-auth {
+	margin-block-start: 8px;
+}
+
+.importright .importright-auth summary {
+	cursor: pointer;
+}
+
+.importright .importright-plain-http[hidden] {
+	display: none;
+}
+
+.importright select {
+	max-inline-size: 100%;
+}
+
+/* Preview */
+
+.importright .importright-scroll {
+	max-inline-size: 100%;
+	overflow-x: auto;
+	margin-block: 8px 16px;
+}
+
+.importright .importright-records th,
+.importright .importright-records td {
+	min-inline-size: 8rem;
+	max-inline-size: 20rem;
+	vertical-align: top;
+}
+
+.importright .importright-records th.num,
+.importright .importright-records td.num {
+	min-inline-size: 0;
+}
+
+.importright .importright-cell {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+}
+
+.importright .importright-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+	margin-block: 8px;
+}
+
+.importright .importright-chips-label {
+	font-weight: 600;
+	margin-inline-end: 4px;
+}
+
+.importright .importright-chip {
+	display: inline-block;
+	max-inline-size: 100%;
+	padding: 3px 10px;
+	border: 1px solid var(--importright-border);
+	border-radius: 12px;
+	background: var(--importright-tint);
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	line-height: 1.6;
+	color: inherit;
+	overflow-wrap: anywhere;
+	text-align: start;
+}
+
+.importright button.importright-chip {
+	cursor: grab;
+	min-block-size: 28px;
+}
+
+.importright button.importright-chip:active {
+	cursor: grabbing;
+	transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.importright button.importright-chip:hover {
+		border-color: var(--importright-accent);
+		color: var(--importright-accent);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.importright button.importright-chip {
+		transition: transform 160ms ease-out;
+	}
+}
+
+/* Mapping */
+
+.importright .importright-mapping-tools {
+	position: sticky;
+	inset-block-start: 32px;
+	z-index: 2;
+	background: var(--importright-surface);
+	border-block-end: 1px solid var(--importright-border);
+	padding-block: 4px 8px;
+	margin-block-end: 12px;
+}
+
+@media screen and (max-width: 782px) {
+	.importright .importright-mapping-tools {
+		position: static;
+	}
+}
+
+@media screen and (min-width: 783px) {
+	.importright .importright-mapping-tools .importright-chips {
+		max-block-size: 7.5rem;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+	}
+}
+
+.importright .importright-preview-record {
+	margin: 4px 0 0;
+}
+
+.importright .importright-group {
+	border: 1px solid var(--importright-border);
+	margin-block-end: 12px;
+}
+
+.importright .importright-group > summary {
+	cursor: pointer;
+	padding: 10px 12px;
+	background: var(--importright-tint);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.importright .importright-group[open] > summary {
+	border-block-end: 1px solid var(--importright-border);
+}
+
+.importright .importright-group-body {
+	padding: 0 12px 8px;
+}
+
+.importright .importright-group-body h4 {
+	margin-block: 16px 4px;
+}
+
+.importright textarea.importright-template {
+	field-sizing: content;
+	min-block-size: 2lh;
+	max-block-size: 10lh;
+}
+
+.importright .importright-rendered {
+	display: block;
+	margin-block-start: 4px;
+	padding-inline-start: 18px;
+	position: relative;
+	color: var(--importright-muted);
+	font-size: 12px;
+	overflow-wrap: anywhere;
+	white-space: pre-wrap;
+}
+
+.importright .importright-rendered:not(:empty)::before {
+	content: "→";
+	position: absolute;
+	inset-inline-start: 2px;
+}
+
+.importright .importright-rendered.is-empty {
+	font-style: italic;
+}
+
+.importright .importright-field-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 10px;
+	align-items: center;
+	margin-block-start: 6px;
+}
+
+.importright .importright-repeater-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+	gap: 8px 12px;
+	align-items: start;
+	padding-block: 10px;
+	border-block-end: 1px solid var(--importright-border);
+}
+
+.importright .importright-repeater-row label {
+	display: block;
+	font-weight: 600;
+	margin-block-end: 2px;
+}
+
+.importright .importright-repeater-row input[type="text"] {
+	inline-size: 100%;
+}
+
+.importright .importright-repeater-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 10px;
+	align-items: center;
+	align-self: end;
+}
+
+.importright .importright-repeater-row .importright-repeater-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin: 0;
+	font-weight: 400;
+}
+
+.importright .importright-repeater-row .importright-repeater-options input[type="text"] {
+	inline-size: 4rem;
+}
+
+.importright .importright-repeater-remove {
+	align-self: end;
+	padding-block-end: 4px;
+}
+
+/* Matching */
+
+.importright .importright-option {
+	display: block;
+	margin-block-end: 6px;
+}
+
+.importright .importright-option .description {
+	display: block;
+	margin-inline-start: 24px;
+}
+
+.importright .importright-rule {
+	display: inline-block;
+	min-inline-size: 12rem;
+	margin: 0 16px 6px 0;
+}
+
+.importright #importright-match-meta {
+	margin-block-start: 6px;
+}
+
+.importright .importright-pro-hint {
+	color: var(--importright-muted);
+}
+
+/* Run */
+
+.importright .importright-run-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+.importright .importright-progress {
+	margin-block: 16px;
+}
+
+.importright .importright-progress-label {
+	display: block;
+	font-weight: 600;
+	margin-block-end: 4px;
+}
+
+.importright .importright-progress progress {
+	inline-size: 100%;
+	max-inline-size: 600px;
+	block-size: 16px;
+}
+
+.importright .importright-progress-status {
+	font-variant-numeric: tabular-nums;
+}
+
+.importright .importright-result {
+	margin-block: 16px;
+}
+
+.importright .importright-counts-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+	gap: 8px;
+	margin: 8px 0 12px;
+	max-inline-size: 960px;
+}
+
+.importright .importright-count {
+	border: 1px solid var(--importright-border);
+	background: var(--importright-surface);
+	padding: 8px 12px;
+}
+
+.importright .importright-count dt {
+	color: var(--importright-muted);
+	font-size: 12px;
+}
+
+.importright .importright-count dd {
+	margin: 2px 0 0;
+	font-size: 20px;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+}
+
+.importright .importright-count-failed dd {
+	color: var(--importright-error);
+}
+
+.importright .importright-run-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 1em 0;
+}
+
+.importright .importright-inline-form {
+	display: inline-flex;
+	margin: 0;
+}
+
+.importright .importright-preview-rows td,
+.importright .importright-log td {
+	vertical-align: top;
+	overflow-wrap: anywhere;
+}
+
+.importright .importright-preview-rows td.importright-key {
+	overflow-wrap: break-word;
+}
+
+.importright .importright-key {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+}
+
+.importright .importright-changes,
+.importright .importright-messages {
+	margin: 0;
+	list-style: none;
+}
+
+.importright .importright-changes li,
+.importright .importright-messages li {
+	margin-block-end: 2px;
+}
+
+.importright .importright-field-name {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	color: var(--importright-muted);
+}
+
+.importright .importright-changes del {
+	color: var(--importright-error);
+}
+
+.importright .importright-changes ins {
+	text-decoration: none;
+	background: color-mix(in oklch, var(--importright-success) 12%, white);
+}
+
+.importright .importright-messages {
+	color: var(--importright-muted);
+	font-size: 12px;
+	margin-block-start: 4px;
+}
+
+/* History, Migrate, Settings */
+
+.importright .importright-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+}
+
+.importright .importright-panel {
+	background: var(--importright-surface);
+	border: 1px solid var(--importright-border);
+	padding: 4px 20px 12px;
+	margin-block: 20px;
+}
+
+@media screen and (max-width: 782px) {
+	.importright .importright-panel {
+		padding-inline: 12px;
+	}
+}
+
+.importright .importright-panel > h2 {
+	margin-block: 16px 8px;
+}
+
+.importright .importright-facts {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+	gap: 8px 24px;
+	margin: 16px 0;
+	max-inline-size: 1200px;
+}
+
+.importright .importright-facts dt {
+	color: var(--importright-muted);
+	font-size: 12px;
+}
+
+.importright .importright-facts dd {
+	margin: 2px 0 0;
+	overflow-wrap: break-word;
+}
+
+.importright .importright-log-tools {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.importright .importright-log-tools .subsubsub {
+	float: none;
+	margin: 0;
+}
+
+.importright .importright-pages .page-numbers {
+	display: inline-block;
+	min-inline-size: 28px;
+	padding: 4px 6px;
+	text-align: center;
+}
+
+.importright .importright-level-error,
+.importright .importright-outcome-failed {
+	border-color: color-mix(in oklch, var(--importright-error) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-error) 10%, white);
+}
+
+.importright .importright-level-notice,
+.importright .importright-outcome-skipped,
+.importright .importright-outcome-kept,
+.importright .importright-check-warning {
+	border-color: color-mix(in oklch, var(--importright-warning) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-warning) 10%, white);
+}
+
+.importright .importright-outcome-restored,
+.importright .importright-outcome-deleted,
+.importright .importright-check-ok {
+	border-color: color-mix(in oklch, var(--importright-success) 50%, transparent);
+	background: color-mix(in oklch, var(--importright-success) 10%, white);
+}
+
+.importright .importright-undo {
+	margin-block: 12px;
+}
+
+.importright .importright-undo-items td,
+.importright .importright-report td,
+.importright .importright-wpai td {
+	vertical-align: top;
+	overflow-wrap: anywhere;
+}
+
+.importright .importright-value {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	white-space: pre-wrap;
+}
+
+.importright .importright-row-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+}
+
+.importright .importright-migrate-result {
+	margin-block: 16px 4px;
+}
+
+.importright .importright-status-table th {
+	inline-size: 30%;
+	font-weight: 600;
+}
+
+.importright .importright-status-table .importright-status {
+	margin-inline-end: 6px;
+}
+
+/* Fields with a fixed set of values */
+
+.importright .importright-choice-template {
+	margin-block-start: 6px;
+}
+
+.importright .importright-choice-template[hidden] {
+	display: none;
+}
+
+.importright .column-time time {
+	white-space: nowrap;
+}
+
+@media screen and (max-width: 782px) {
+	.importright .tablenav.top .actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		align-items: center;
+		float: none;
+		margin-block-end: 8px;
+	}
+}
+
+/* Wide tables become one labelled block per row on narrow screens. */
+
+@media screen and (max-width: 782px) {
+	.importright table.importright-stack thead {
+		position: absolute;
+		inline-size: 1px;
+		block-size: 1px;
+		overflow: clip;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.importright table.importright-stack,
+	.importright table.importright-stack tbody,
+	.importright table.importright-stack tr,
+	.importright table.importright-stack td {
+		display: block;
+		inline-size: auto;
+	}
+
+	.importright table.importright-stack tr {
+		padding-block: 8px;
+		border-block-end: 1px solid var(--importright-border);
+	}
+
+	.importright table.importright-stack td {
+		padding: 3px 10px;
+		text-align: start;
+	}
+
+	.importright table.importright-stack td:empty {
+		display: none;
+	}
+
+	.importright table.importright-stack td[data-label]::before {
+		content: attr(data-label);
+		display: block;
+		color: var(--importright-muted);
+		font-size: 12px;
+	}
+}
